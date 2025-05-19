@@ -183,18 +183,20 @@ const Canvas: React.FC<CanvasProps> = ({ tool, color }) => {
   };
 
   const renderCursors = () => {
-    return Object.values(cursors).map((cursor) => (
-      <Group key={cursor.username}>
-        <Circle x={cursor.x} y={cursor.y} radius={4} fill="blue" />
-        <Text
-          x={cursor.x + 6}
-          y={cursor.y - 10}
-          text={cursor.username}
-          fontSize={12}
-          fill="black"
-        />
-      </Group>
-    ));
+    return Object.values(cursors)
+      .filter((cursor) => cursor.id !== userId.current)
+      .map((cursor) => (
+        <Group key={cursor.username}>
+          <Circle x={cursor.x} y={cursor.y} radius={4} fill="blue" />
+          <Text
+            x={cursor.x + 6}
+            y={cursor.y - 10}
+            text={cursor.username}
+            fontSize={12}
+            fill="black"
+          />
+        </Group>
+      ));
   };
 
   return (
