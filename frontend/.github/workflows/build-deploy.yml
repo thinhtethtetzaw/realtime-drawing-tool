@@ -1,0 +1,22 @@
+name: Build and deploy on aws
+
+on:
+  push:
+    branches:
+    - "develop"
+    tags:
+    - 'v*.*.*-beta'
+    - 'v*.*.*'
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read
+  pull-requests: write
+  issues: write
+  repository-projects: read
+
+jobs:
+  build-deploy:
+    if: ${{ vars.ENABLE_WORKFLOWS == 'true' }}
+    uses: General-Magick-Industries/remote-cicd-workflows/.github/workflows/build-deploy.yml@main
+    secrets: inherit

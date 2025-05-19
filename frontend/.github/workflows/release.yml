@@ -1,0 +1,20 @@
+name: Release
+
+on:
+  push:
+    branches:
+    - "staging"
+    - "hotfix/**"
+    - "main"
+    - "master"
+
+permissions:
+  issues: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    if: ${{ vars.ENABLE_WORKFLOWS == 'true' }}
+    uses: General-Magick-Industries/remote-cicd-workflows/.github/workflows/release.yml@main
+    secrets: inherit
